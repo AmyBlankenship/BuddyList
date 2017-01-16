@@ -1,0 +1,54 @@
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+/*normally I'd use ems, but I'm trying to match bootstrap*/
+.other-buddies {
+    margin-bottom:10px;
+}
+.other-buddies .btn {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+#isDescending {
+    margin-left: 10px;
+}
+
+.buddy * {
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+    cursor: default;
+}
+.buddy .btn-danger {
+    margin-top:10px;
+}
+.rating {
+    cursor: pointer;
+}
+.star {
+    color: darkorange;
+}
+.expanded-info {
+    border: 1px solid #999999;
+    border-radius: 4px;
+}
+.Available {
+    color: green;
+    font-weight: bold;
+}
+.Busy {
+    color: orange;
+}
+
+.Idle {
+    color: dodgerblue;
+}
+
+.Offline {
+    color: red;
+}
+
+.modal-footer .pull-right {
+    /*fix collapsing box model */
+    overflow: hidden;
+}

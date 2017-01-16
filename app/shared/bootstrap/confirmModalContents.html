@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <!--by using ng-bind insttead of ng-bind-html, we trade not having to use $sce for not being able to use markup in the model-->
+    <h3 class="modal-title" id="modal-title" data-ng-bind="model.header||'Please confirm'" />
+</div>
+<div class="modal-body" id="modal-body" data-ng-bind="model.body||'Are you sure?'" />
+<div class="modal-footer">
+    <div class="pull-right">
+        <!--executive decision to treat this as something we'd reuse and so not making this a warning button-->
+        <button class="btn btn-primary" type="button" data-ng-click="confirm()" data-ng-bind="model.btnConfirm" />
+        <button class="btn btn-secondary" type="button" data-ng-click="dismiss()" data-ng-bind="model.btnCancel" />
+    </div>
+</div>

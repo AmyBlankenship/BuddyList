@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <form name="buddysearch" id="buddy-search" class="form-inline">
+        <form-group>
+            <label for="email">Search by email address:</label>
+            <input type="email" id="email" required="true" class="form-control" data-ng-model="vm.email" />
+        </form-group>
+        <form-group>
+            <button type="submit" class="btn btn-default" data-ng-model="vm.email" data-ng-attr-disabled="!buddysearch.email.$valid" data-ng-click="vm.findBuddy(vm.email)">Search</button>
+        </form-group>
+        <p class="bg-danger search-msg" data-ng-if="buddysearch.email.$dirty && !buddysearch.email.$valid">Please enter a valid email.</p>
+    </form>
+    <div class="row" data-ng-if="!!vm.selectedBuddy && !!vm.selectedBuddy.userName">
+        <div class="col-xs-11">
+            <h3>{{vm.selectedBuddy.userName}}</h3>
+            <div >
+                <div class="row">
+                    <div class="col-xs-6"><strong>Email:</strong> {{vm.selectedBuddy.email}}</div><div class="col-xs-6"><strong>Birthday:</strong> {{vm.selectedBuddy.birthday}}</div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary col-xs-1" data-ng-click="vm.addBuddy(vm.selectedBuddy)">+</button>
+    </div>
+    <div data-ng-class="vm.messageStyle" data-ng-if="!!vm.message" data-ng-bind="vm.message">
+
+    </div>
+    <div >
+        <button type="button" class="btn btn-secondary" data-ng-click="vm.done()">Done Adding Buddies</button>
+    </div>
+</div>

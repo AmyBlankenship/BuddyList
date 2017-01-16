@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <form name="buddysearch" id="buddy-search" class="form-inline">
+        <form-group>
+            <label for="email">Enter an email address:</label>
+            <input type="email" id="email" required="true" class="form-control" data-ng-model="vm.email" />
+        </form-group>
+        <form-group>
+            <button type="submit" class="btn btn-default" data-ng-model="vm.email" data-ng-attr-disabled="!buddysearch.email.$valid" data-ng-click="vm.message='There is no back end to this project, so nobody was invited.'">Invite</button>
+        </form-group>
+        <p class="bg-danger search-msg" data-ng-if="buddysearch.email.$dirty && !buddysearch.email.$valid">Please enter a valid email.</p>
+    </form>
+    <p class="bg-info" data-ng-if="!!vm.message" data-ng-bind="vm.message"></p>
+    <div >
+        <button type="button" class="btn btn-secondary" data-ng-click="vm.done()">Done Inviting Buddies</button>
+    </div>
+</div>

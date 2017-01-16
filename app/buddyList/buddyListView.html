@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <!--TODO: refactor to use BS collapsing nav if time-->
+    <div class="row other-buddies">
+        <button class="btn btn-primary pull-right" data-ng-click="vm.addBuddy()">Add a Buddy</button>
+        <button class="btn btn-primary pull-right" data-ng-click="vm.inviteBuddy()">Invite a Buddy</button>
+    </div>
+    <form class="row" name="sortAndFilter">
+        <div class="col-sm-6">
+            <form-group>
+                <label for="sortCriteria">Sort By:</label>
+                <!--Even though we're attaching these values to vm, they are
+                    used strictly on the View side and the Controller has no
+                    knowledge of them.
+                    Extra ng-click is because it wasn't sorting on select change.
+                    It's not clear why orderBy is not ordering as expected, and
+                    the spec vs. timeline does not allow me to debug the framework.
+                    Also, not styled as form controls because it makes them too big and important visually
+                -->
+                <select id="sortCriteria" data-ng-model="vm.sortCriteria" data-ng-click="angular.noop()">
+                    <option value="rank">Rating</option>
+                    <option value="userName">User Name</option>
+                    <option value="email">Email Address</option>
+                </select>
+            </form-group>
+            <form-group>
+                <input type="checkbox" id="isDescending" data-ng-model="vm.isDescending" />
+                <label for="isDescending">Descending</label>
+            </form-group>
+        </div>
+        <div class="col-sm-6">
+            <form-group>
+                <label for="filterCriteria">Filter By:</label>
+                <select id="filterCriteria" data-ng-model="vm.filterCriteria" data-ng-change="vm.filterValue='';vm.filterObj={};vm.filterObj[vm.filterCriteria]=''">
+                    <option value="rank">Rating</option>
+                    <option value="userName">User Name</option>
+                    <option value="email">Email Address</option>
+                </select>
+            </form-group>
+            <form-group>
+                <label for="filterValue">Filter On:</label>
+                <input id="filterValue" data-ng-model="vm.filterValue" type="text" data-ng-change="vm.filterObj[vm.filterCriteria]=vm.filterValue" />
+            </form-group>
+        </div>
+    </form>
+    <div class="row" class="buddy" data-ng-repeat="buddy in vm.buddies | orderBy:vm.sortCiteria:vm.isDescending | filter:vm.filterObj">
+        <div class="col-xs-12" data-ng-click="vm.selectBuddy(buddy)">
+            <div class="row">
+                <div class="col-xs-11">
+                    <!--less worried about FOUC in ng-repeat
+                    also: TODO: refactor to use glyphicon if time-->
+                    <h3>{{buddy.userName}} <span class="rating" data-ng-repeat="rating in [1,2,3,4,5]" data-ng-click="$event.preventDefault();buddy.rank=rating" data-ng-class="{star:rating<=buddy.rank}">*</span></h3>
+                    <p>{{buddy.firstName}} {{buddy.lastName}} <span data-ng-class="buddy.status">{{buddy.status}}</span></p>
+                    <div class="expanded-info row" data-ng-if="vm.selectedBuddy == buddy">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-6"><strong>Email:</strong> {{buddy.email}}</div><div class="col-xs-6"><strong>Birthday:</strong> {{buddy.birthday}}</div>
+                            </div>
+                            <div data-ng-show="buddy.status=='Offline'"><strong>Last Seen:</strong> {{buddy.lastSeen}}</div>
+                            <div >
+                                <div><strong>Bio:</strong></div>
+                                <div class="bio">{{buddy.bio}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-danger col-xs-1" data-ng-click="vm.deleteBuddy(buddy)">-</button>
+            </div>
+        </div>
+    </div>
+</div>
